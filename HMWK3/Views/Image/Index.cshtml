@@ -1,0 +1,76 @@
+﻿@using HMWK3.Models
+@model List<FileModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1>Images</h1>
+<h3>A Bunch of pictures</h3>
+
+<head>
+    <style type="text/css">
+
+        .container {
+            overflow: auto;
+            
+        }
+
+       .thumbnail{
+           border-color:darkgrey;
+
+       }
+
+       .col-xs-2{
+           display:flex;
+           justify-content:center;
+           margin:3px;
+       }
+
+    </style>
+</head>
+
+<div class="container">
+    <div class="row">
+        @foreach (FileModel image in Model)
+         {
+
+                <div class="col-md-4">
+                     <div class="thumbnail">
+                         <a>
+                             <img src="~/Content/Media/Images/"@Path.GetFileName(image.FileName) alt="Image">
+                         </a>
+                           
+                             <div class="caption">
+                                <p>@image.FileName</p>
+                            </div>
+                             <div class="row">
+                                 <div class="col-xs-2">
+                                     <button class="btn-info">
+                                         @Html.ActionLink("Download", "DownloadFile",
+                                          new { fileName = image.FileName })
+                                     </button>
+                                 </div>
+                                 
+                                 <div class="col-xs-2">
+                                     <button class="btn-danger">
+                                         @Html.ActionLink("DELETE", "DeleteFile",
+                                        new { fileName = image.FileName },
+                                        new { onclick = "return confirm('Are you sure you wish to delete this?');" })
+                                     </button>
+                                 </div>
+                             </div>
+                        
+                    </div>
+              </div>
+               
+         }
+        
+    </div>
+</div>
+
+<script>
+$(document).ready(function ($) {
+$(".gallery a").fancybox();
+});
+</script>

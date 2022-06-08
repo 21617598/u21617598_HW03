@@ -1,0 +1,67 @@
+﻿@using HMWK3.Models
+@model List<FileModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1>Documents</h1>
+<h3>List of files</h3>
+
+<head>
+    <style type="text/css">
+
+        .container {
+            
+            overflow:auto;
+           
+        }
+
+        thead {
+
+            position:sticky;
+            top:0;
+            background-color:burlywood
+        }
+
+        .t {
+            text-align: center;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+
+<div class="container">
+    <div class="well-sm">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="col-lg-8">File Name</th>
+                    <th class="t, col-lg-2">Download Option</th>
+                    <th class="t, col-lg-2">Delete Option</th>
+                </tr>
+            </thead>
+            
+            @foreach (FileModel file in Model)
+            {
+                <tr>
+                    <td>@file.FileName</td>
+                    <td>
+                        <button class="btn-info">
+                            @Html.ActionLink("Download", "DownloadFile",
+                             new { fileName = file.FileName })
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn-danger">
+                            @Html.ActionLink("DELETE", "DeleteFile",
+                           new { fileName = file.FileName },
+                           new { onclick = "return confirm('Are you sure you wish to delete this?');" })
+                        </button>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

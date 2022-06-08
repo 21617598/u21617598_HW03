@@ -1,0 +1,60 @@
+﻿@model HMWK3.Models.FileModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="well-lg">
+    <h1>DIA MEDIA</h1>
+    <h3>Media uploading made easy</h3>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-10 col-md-6 col-lg-6 ">
+            <h2>DESCRIPTION ON DIA MEDIA</h2>
+            <p>
+                This is a short description on this system:
+                <br />
+                DIA MEDIA - `Media uploading made easy` - allows you to upload media files.
+                You can upload videos, images or files. You are able to select a file or media of your choice from your computer and upload it through the form under Option Selection,
+                which is the file uploading section that will submit your file or media and upload it.
+                The uploaded files can be displayed and viewed. You can download and delete uploaded media.
+                All of this is done through MVC and the code can be viewed through Visual Studios.
+            </p>
+        </div>
+        <div class="col-sm-8 col-md-4 col-lg-4">
+            <h2>OPTION SELECTION</h2>
+
+            <div class="form-horizontal">
+                @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+                {
+                    <input type="radio" id="doc" name="radiobutton" value="Document" />
+                    <label for="doc">Document</label> <br />
+                    <input type="radio" id="img" name="radiobutton" value="Image" />
+                    <label for="img">Image</label> <br />
+                    <input type="radio" id="vid" name="radiobutton" value="Video" />
+                    <label for="vid">Video</label>
+
+                    <div><input type="file" id="mediafiles" name="mediafiles" value="Choose file.." /></div>
+                    <br />
+
+                    <div><input type="submit" value="Upload" /></div>
+                    <br />
+                    <div>@ViewBag.UploadStatus</div>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Script for checked radio button
+<script type="text/javascript">
+
+        $(document).ready(function () {
+
+                $("#doc").prop("checked", true);
+
+        });
+</script>
+    -->

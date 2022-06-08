@@ -1,0 +1,56 @@
+﻿@using HMWK3.Models
+@model List<FileModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1>Videos</h1>
+<h3>A Bunch Of Videos</h3>
+
+
+<div class="container">
+    <div class="row">
+        @foreach (FileModel video in Model)
+        {
+
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <video>
+                        <a>
+                            <source src="~/Content/Media/Videos/@Path.GetFileName(video.FileName)" alt="Video">
+                        </a>
+                    </video>
+                    <div class="caption">
+                        <p>@video.FileName</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2" style="padding:inherit;">
+                            <button class="btn-info">
+                                @Html.ActionLink("Download", "DownloadFile",
+                                 new { fileName = video.FileName })
+                            </button>
+                        </div>
+                        <div class="col-xs-2" style="padding:inherit;">
+                            <button class="btn-danger">
+                                @Html.ActionLink("DELETE", "DeleteFile",
+                               new { fileName = video.FileName },
+                               new { onclick = "return confirm('Are you sure you wish to delete this?');" })
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        }
+
+    </div>
+</div>
+
+<script>
+$(document).ready(function ($) {
+$("a").fancybox();
+});
+</script>
+
